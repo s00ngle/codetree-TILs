@@ -27,11 +27,13 @@ def move_right():
         row.reverse()
 
 def move_up():
+    global grid
     grid = list(map(list, zip(*grid)))
     move_left()
     grid = list(map(list, zip(*grid)))
 
 def move_down():
+    global grid
     grid = list(map(list, zip(*grid)))
     move_right()
     grid = list(map(list, zip(*grid)))
