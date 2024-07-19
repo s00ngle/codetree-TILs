@@ -17,8 +17,9 @@ public class Main {
             st = new StringTokenizer(br.readLine());
             works[i] = new Work(i, i + Integer.parseInt(st.nextToken()) - 1, Integer.parseInt(st.nextToken()));
         }
-
-        dp[works[0].end] = works[0].money;
+        if (works[0].end < n) {
+            dp[works[0].end] = works[0].money;
+        }
 //        System.out.println(Arrays.toString(dp));
         for (int i = 1; i < n; i++) {
             if (works[i].end >= n) continue;
