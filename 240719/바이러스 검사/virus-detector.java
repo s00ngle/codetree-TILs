@@ -21,7 +21,7 @@ public class Main {
         int leader = Integer.parseInt(st.nextToken());
         int crew = Integer.parseInt(st.nextToken());
 
-        int result = 0;
+        long result = 0;
         for (int i = 0; i < n; i++) {
             customers[i] -= leader;
             result++;
