@@ -15,14 +15,14 @@ public class Main {
         int[] dp = new int[n];
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
-            works[i] = new Work(i, Math.min(i + Integer.parseInt(st.nextToken()) - 1, n - 1), Integer.parseInt(st.nextToken()));
+            works[i] = new Work(i, i + Integer.parseInt(st.nextToken()) - 1, Integer.parseInt(st.nextToken()));
         }
 
         dp[works[0].end] = works[0].money;
-        
+
         for (int i = 1; i < n; i++) {
-            dp[works[i].end] = Math.max(dp[works[i].end - 1] + works[i].money, dp[works[i].end]);
-            dp[i] = Math.max(dp[i], dp[i - 1]);
+            if (works[i].end >= n) continue;
+            dp[works[i].end] = Math.max(dp[works[i].start - 1] + works[i].money, dp[works[i].end]);
         }
 
         bw.write(Arrays.stream(dp).max().getAsInt() + "\n");
