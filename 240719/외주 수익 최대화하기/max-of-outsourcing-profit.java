@@ -21,6 +21,7 @@ public class Main {
         dp[works[0].end] = works[0].money;
         for (int i = 1; i < n; i++) {
             dp[works[i].end] = Math.max(dp[works[i].end - 1] + works[i].money, dp[works[i].end]);
+            dp[i] = Math.max(dp[i], dp[i - 1]);
         }
 
         bw.write(Arrays.stream(dp).max().getAsInt() + "\n");
