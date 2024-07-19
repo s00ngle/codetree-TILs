@@ -19,12 +19,13 @@ public class Main {
         }
 
         dp[works[0].end] = works[0].money;
-
+//        System.out.println(Arrays.toString(dp));
         for (int i = 1; i < n; i++) {
             if (works[i].end >= n) continue;
             dp[works[i].end] = Math.max(dp[works[i].start - 1] + works[i].money, dp[works[i].end]);
+            dp[i] = Math.max(dp[i], dp[i - 1]);
+//            System.out.println(Arrays.toString(dp));
         }
-
         bw.write(Arrays.stream(dp).max().getAsInt() + "\n");
         bw.flush();
         bw.close();
