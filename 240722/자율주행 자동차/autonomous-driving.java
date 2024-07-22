@@ -61,7 +61,7 @@ public class Main {
                 int reverse = (direction + 2) % 4;
                 int nx = x + dx[reverse];
                 int ny = y + dy[reverse];
-                if (map[nx][ny] == 0 && !visited[nx][ny]) {
+                if (map[nx][ny] == 0) {
                     x = nx;
                     y = ny;
                 }
