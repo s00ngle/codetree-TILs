@@ -31,19 +31,21 @@ public class Main {
             }
         }
 
-        visited = new boolean[N][N];
         int ans = 0;
         while (true) {
             boolean flag = true;
 
+            visited = new boolean[N][N];
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
                     if (!visited[i][j]) {
                         List<Point> group = new ArrayList<>();
                         DFS(i, j, group);
+
                         if (group.size() >= 2) {
                             flag = false;
                         }
+
                         int sum = 0;
                         for (Point point : group) {
                             sum += map[point.x][point.y];
