@@ -49,7 +49,6 @@ public class Main {
                 int ny = y + dy[direction];
 
                 if (map[nx][ny] == 0 && !visited[nx][ny]) {
-                    turnLeft();
                     x = nx;
                     y = ny;
                     result++;
@@ -66,6 +65,8 @@ public class Main {
                     y = ny;
                 }
                 else {
+//                    System.out.println("break");
+//                    System.out.println("direction: " + direction);
                     break;
                 }
             }
