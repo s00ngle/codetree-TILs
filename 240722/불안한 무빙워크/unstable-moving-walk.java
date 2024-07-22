@@ -30,13 +30,15 @@ public class Main {
 
             // 1. 무빙워크 한 칸 회전
             enter = ((enter + 2 * n) - 1) % (2 * n);
+            int exit = (enter + n - 1) % (2 * n);
 
             // 2. 무빙 워크 위의 모든 사람 한 칸 위로
             // 바로 앞 칸에 사람이 있거나 앞 칸 안정성 0이면 이동 x
-            int exit = (enter + n - 1) % (2 * n);
-            if (check[exit]) {
+
+            if (check[exit]) { // 회전 후 끝에 사람 도착하면 내리기
                 check[exit] = false;
             }
+
             for (int i = n - 2 ; i >= 0 ; i--) {
                 int idx = (enter + i) % (2 * n);
                 int next = (idx + 1) % (2 * n);
@@ -45,6 +47,10 @@ public class Main {
                     check[next] = true;
                     walk[next]--;
                 }
+            }
+
+            if (check[exit]) { // 앞으로 한 칸씩 이동 후 끝 칸 확인 후 내리기
+                check[exit] = false;
             }
 
             // 3. 1번 칸에 사람 없고 안정성 0 아니면 사람 추가
