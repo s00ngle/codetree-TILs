@@ -5,6 +5,7 @@ public class Main {
 
     static int N, M;
     static int[][] arr;
+    static int answer;
 
     public static void main(String[] args) throws IOException {
 
@@ -16,7 +17,7 @@ public class Main {
 
         arr = new int[N][N];
         List<Point> person = new ArrayList<>();
-        List<Hospital> hospital = new ArrayList<>();
+        List<Point> hospital = new ArrayList<>();
 
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
@@ -26,63 +27,37 @@ public class Main {
                     person.add(new Point(i, j));
                 }
                 if (arr[i][j] == 2) {
-                    hospital.add(new Hospital(new Point(i, j), new int[2 * N]));
+                    hospital.add(new Point(i, j));
                 }
             }
         }
 
-        for (Hospital value : hospital) {
-            for (Point point : person) {
-                int diff = diff(value.point, point);
-                value.distance[diff]++;
-            }
-        }
-
-        Collections.sort(hospital);
-
-//        for (Hospital h : hospital) {
-//            System.out.println(h);
-//        }
-
-        int ans = 0;
-
-        for (Point p: person) {
-            int min = Integer.MAX_VALUE;
-            for (int i = 0 ; i < M; i++) {
-                min = Math.min(min, diff(p, hospital.get(i).point));
-            }
-            ans += min;
-        }
-
-        System.out.println(ans);
+        answer = Integer.MAX_VALUE;
+        DFS(person, hospital, 0, 0, new int[M]);
+        System.out.println(answer);
     }
 
-    static class Hospital implements Comparable<Hospital> {
-        Point point;
-        int[] distance;
-
-        Hospital(Point point, int[] distance) {
-            this.point = point;
-            this.distance = distance;
-        }
-
-        @Override
-        public String toString() {
-            return "point: " + point + ", distance: " + Arrays.toString(distance);
-        }
-
-        @Override
-        public int compareTo(Hospital h) {
-            for (int i = 0; i < distance.length; i++) {
-                if (distance[i] < h.distance[i]) {
-                    return 1;
-                } else if (distance[i] > h.distance[i]) {
-                    return -1;
+    static void DFS(List<Point> person, List<Point> hospital, int idx, int cnt, int[] selected) {
+        if (cnt == M) {
+            int sum = 0;
+            for (Point p : person) {
+                int min = Integer.MAX_VALUE;
+                for (int i = 0; i < M; i++) {
+                    min = Math.min(min, diff(p, hospital.get(selected[i])));
                 }
+                sum += min;
             }
-            return 0;
+            answer = Math.min(answer, sum);
+            return;
         }
+
+        for (int i = idx; i < hospital.size(); i++) {
+            selected[cnt] = i;
+            DFS(person, hospital, i + 1, cnt + 1, selected);
+        }
+
     }
+
 
     static class Point {
         int x;
