@@ -53,7 +53,7 @@ public class Main {
         sum += map[x][y];
         visited[x][y] = true;
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 2; i++) {
             int nx = x + dx[i];
             int ny = y + dy[i];
             if (nx < 0 || nx >= N || ny < 0 || ny >= M) continue;
