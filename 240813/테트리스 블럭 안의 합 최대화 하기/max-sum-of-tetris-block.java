@@ -37,11 +37,8 @@ public class Main {
         max = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-
                 DFS(i, j, 1, map[i][j]);
-                checkCross(i, j);
-
-                
+//                checkCross(i, j);
             }
         }
 
@@ -53,7 +50,6 @@ public class Main {
             max = Math.max(max, sum);
             return;
         }
-
 
         for (int i = 0; i < 4; i++) {
             int nx = x + dx[i];
