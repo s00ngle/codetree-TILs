@@ -37,8 +37,8 @@ public class Main {
         max = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                DFS(i, j, 1, map[i][j]);
-//                checkCross(i, j);
+                DFS(i, j, 1, 0);
+                checkCross(i, j);
             }
         }
 
@@ -46,33 +46,38 @@ public class Main {
     }
 
     static void DFS(int x, int y, int depth, int sum) {
+
+        sum += map[x][y];
+
         if (depth == 4) {
             max = Math.max(max, sum);
             return;
         }
 
-        for (int i = 0; i < 4; i++) {
+        visited[x][y] = true;
+
+        for (int i = 0; i < 3; i++) {
             int nx = x + dx[i];
             int ny = y + dy[i];
             if (nx < 0 || nx >= N || ny < 0 || ny >= M) continue;
 
             if (!visited[nx][ny]) {
-                visited[x][y] = true;
-                DFS(nx, ny, depth + 1, sum + map[nx][ny]);
-                visited[x][y] = false;
+                DFS(nx, ny, depth + 1, sum);
             }
         }
+
+        visited[x][y] = false;
     }
 
     static void checkCross(int x, int y) {
         int sum = map[x][y];
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0 ; i < 4; i++) {
             int nx = x + dx[i];
             int ny = y + dy[i];
             if (nx < 0 || nx >= N || ny < 0 || ny >= M) continue;
             sum += map[nx][ny];
         }
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0 ; i < 4; i++) {
             int nx = x + dx[i];
             int ny = y + dy[i];
             if (nx < 0 || nx >= N || ny < 0 || ny >= M) {
