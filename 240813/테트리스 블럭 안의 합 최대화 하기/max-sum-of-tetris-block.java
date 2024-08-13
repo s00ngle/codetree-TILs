@@ -37,12 +37,11 @@ public class Main {
         max = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                if (!visited[i][j]) {
-                    visited[i][j] = true;
-                    DFS(i, j, 1, map[i][j]);
-                    checkCross(i, j);
-                    visited[i][j] = false;
-                }
+
+                DFS(i, j, 1, map[i][j]);
+                checkCross(i, j);
+
+                
             }
         }
 
@@ -62,9 +61,9 @@ public class Main {
             if (nx < 0 || nx >= N || ny < 0 || ny >= M) continue;
 
             if (!visited[nx][ny]) {
-                visited[nx][ny] = true;
+                visited[x][y] = true;
                 DFS(nx, ny, depth + 1, sum + map[nx][ny]);
-                visited[nx][ny] = false;
+                visited[x][y] = false;
             }
         }
     }
