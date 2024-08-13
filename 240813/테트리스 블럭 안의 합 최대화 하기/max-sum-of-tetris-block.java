@@ -50,12 +50,11 @@ public class Main {
     }
 
     static void DFS(int x, int y, int depth, int sum) {
-
-        if (depth == 3) {
+        if (depth == 4) {
             max = Math.max(max, sum);
+            return;
         }
 
-        visited[x][y] = true;
 
         for (int i = 0; i < 4; i++) {
             int nx = x + dx[i];
@@ -63,11 +62,11 @@ public class Main {
             if (nx < 0 || nx >= N || ny < 0 || ny >= M) continue;
 
             if (!visited[nx][ny]) {
+                visited[x][y] = true;
                 DFS(nx, ny, depth + 1, sum + map[nx][ny]);
+                visited[x][y] = false;
             }
         }
-
-        visited[x][y] = false;
     }
 
     static void checkCross(int x, int y) {
