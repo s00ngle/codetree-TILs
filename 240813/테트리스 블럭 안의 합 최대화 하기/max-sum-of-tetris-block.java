@@ -62,9 +62,9 @@ public class Main {
             if (nx < 0 || nx >= N || ny < 0 || ny >= M) continue;
 
             if (!visited[nx][ny]) {
-                visited[x][y] = true;
+                visited[nx][ny] = true;
                 DFS(nx, ny, depth + 1, sum + map[nx][ny]);
-                visited[x][y] = false;
+                visited[nx][ny] = false;
             }
         }
     }
