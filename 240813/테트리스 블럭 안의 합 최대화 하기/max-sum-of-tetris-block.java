@@ -37,7 +37,7 @@ public class Main {
         max = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                DFS(i, j, 0, 0);
+                DFS(i, j, 1, 0);
                 checkCross(i, j);
             }
         }
@@ -46,11 +46,13 @@ public class Main {
     }
 
     static void DFS(int x, int y, int depth, int sum) {
+
+        sum += map[x][y];
+
         if (depth == 4) {
             max = Math.max(max, sum);
         }
 
-        sum += map[x][y];
         visited[x][y] = true;
 
         for (int i = 0; i < 2; i++) {
